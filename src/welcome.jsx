@@ -10,7 +10,7 @@ import ReactDOM from 'react-dom'
         const { state } = this;
         return (
             <div>
-                { count }
+                { state.count }
                 <button onClick={ () => state.count++ }>
                     Increment
                 </button>                

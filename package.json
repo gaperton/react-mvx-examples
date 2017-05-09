@@ -1,0 +1,58 @@
+{
+  "name": "react-mvx-examples",
+  "version": "0.1.0",
+  "description": "Examples from React-MVx tutorials",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node_modules/.bin/webpack -p",
+    "watch": "node_modules/.bin/webpack --progress --colors --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gaperton/react-mvx-docs.git"
+  },
+  "keywords": [
+    "react-mvx",
+    "reactjs",
+    "react",
+    "mvc",
+    "mvvm",
+    "model",
+    "view",
+    "type-r",
+    "nestedtypes",
+    "nestedreact",
+    "databinding",
+    "validation",
+    "architecture"
+  ],
+  "devDependencies": {
+    "webpack": "*",
+    "css-loader": "*",
+    "style-loader": "*",
+    "babel-cli": "*",
+    "babel-core": "*",
+    "babel-loader": "*",
+    "babel-plugin-transform-decorators-legacy": "*",
+    "babel-plugin-add-module-exports": "*",
+    "babel-plugin-transform-object-rest-spread": "*",
+    "babel-plugin-transform-class-properties": "*",
+    "babel-plugin-transform-react-constant-elements": "*",
+    "babel-plugin-transform-react-inline-elements": "*",
+    "babel-preset-es2015": "*",
+    "babel-preset-react": "*",
+    "babel-runtime": "*",
+
+    "react": "*",
+    "react-dom": "*",
+    "react-mvx": "^1.0.0-a00",
+    "type-r": "^1.0.0-a00"    
+  },
+  "author": "Vlad Balin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gaperton/react-mvx-docs/issues"
+  },
+  "homepage": "https://github.com/gaperton/react-mvx-docs#readme"
+}

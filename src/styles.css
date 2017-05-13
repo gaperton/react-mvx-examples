@@ -1,0 +1,16 @@
+.validated-control .error {
+    display: inline-block;
+    color: red
+}
+
+.validated-control {
+    display: inline-block;
+}
+
+label {
+    display: block;
+}
+
+.users-grid .users-row>div {
+    display: inline-block;
+}

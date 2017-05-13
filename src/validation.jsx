@@ -1,5 +1,6 @@
 import React, { define } from 'react-mvx'
 import ReactDOM from 'react-dom'
+import './styles.css'
 
 /**
  * React-MVx itself is rather thin layer on top of the Type-R,
@@ -8,7 +9,7 @@ import ReactDOM from 'react-dom'
  * Let's do some Type-R magic first.
  */
 
-// Define email validator.
+// Define email validator. Something simple, just for illustration purposes.
 function isValidEmail( x ){
     return !x || x.indexOf('@') >= 0;
 }
@@ -19,20 +20,14 @@ isValidEmail.error = 'Invalid email';
 // Now, let's define Email attribute type.
 const Email = String.has.check( isValidEmail );
 
-// Now, let's define the user type.
-@define class User extends Record {
-    static attributes = {
-        name : String.isRequired,
-        email : Email.isRequired,
-        isActive : true
-    }
-}
-
-// And we will need validated input control.
+/**
+ * Links are used as value _and_ validation error transport.
+ * Lets define an input control which displays the validation error.
+ */
 const Input = ({ link, ...props }) => (
     <div className="validated-control">
         <input { ...link.props} />
-        link.error && <div className="error">{ link.error }</div>
+        { link.error && <div className="error">{ link.error }</div> }
     </div>
 );
 
@@ -40,7 +35,11 @@ const Input = ({ link, ...props }) => (
  * Here we go. Boom!
  */
 @define class Application extends React.Component {
-    static state = User;
+    static state = {
+        name : String.isRequired,
+        email : Email.isRequired,
+        isActive : true
+    };
 
     componentWillMount(){
         // Load from the local storage.
@@ -71,9 +70,9 @@ const Input = ({ link, ...props }) => (
                     Is active: <input type="checkbox" { ...isActive.props }/>
                 </label>
 
-                <button type="submit" disabled={ this.state.isValid() }>Save</button>
+                <button type="submit" disabled={ !this.state.isValid() }>Save</button>
                 <button type="button" onClick={ this.onCancel }>
-                    Cancel
+                    Clear
                 </button>
             </form>
         );

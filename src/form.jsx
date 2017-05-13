@@ -39,7 +39,7 @@ import ReactDOM from 'react-dom'
 
                 <button type="submit">Save</button>
                 <button type="button" onClick={ this.onCancel }>
-                    Cancel
+                    Clear
                 </button>
             </form>
         );

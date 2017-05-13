@@ -1,3 +1,6 @@
+import React, { define } from 'react-mvx'
+import ReactDOM from 'react-dom'
+
 @define class Application extends React.Component {
     static state = {
         name : '',
@@ -5,32 +8,36 @@
         isActive : true
     };
 
-    onSubmit =  e => {
-
+    componentWillMount(){
+        // Load from the local storage.
+        const json = JSON.parse( localStorage.getItem( 'users-form' ) || '{}' );
+        this.state.set( json, { parse : true } );
     }
+
+    // Save to the local storage
+    onSubmit =  e => localStorage.setItem( 'users-form', JSON.stringify( this.state ) );
 
     onCancel = () => this.state.set( this.state.defaults() );
 
     render(){
-        const linked = this.state.linkAll();
+        // Link the state...
+        const { name, email, isActive } = this.linkAll();
 
         return (
             <form onSubmit={ this.onSubmit }>
                 <label>
-                    Name: <Input type="text" valueLink={ linked.name }/>
+                    Name: <input type="text" { ...name.props }/>
                 </label>
 
                 <label>
-                    Email: <Input type="text" valueLink={ linked.email }/>
+                    Email: <input type="text" { ...email.props }/>
                 </label>
 
                 <label>
-                    Is active: <Input type="checkbox" checkedLink={ linked.isActive }/>
+                    Is active: <input type="checkbox" { ...isActive.props }/>
                 </label>
 
-                <button type="submit" disabled={ !user.isValid() }>
-                    Save
-                </button>
+                <button type="submit">Save</button>
                 <button type="button" onClick={ this.onCancel }>
                     Cancel
                 </button>
@@ -38,3 +45,5 @@
         );
     }
 }
+
+ReactDOM.render( <Application/>, document.getElementById( 'react-application' ) );

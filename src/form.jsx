@@ -1,3 +1,4 @@
+import './styles.css'
 import React, { define } from 'react-mvx'
 import ReactDOM from 'react-dom'
 

@@ -1,6 +1,7 @@
 .validated-control .error {
     display: inline-block;
-    color: red
+    color: red;
+    padding-left: 6px;
 }
 
 .validated-control {
@@ -9,8 +10,26 @@
 
 label {
     display: block;
+    margin: 10px;
+}
+
+.header,form {
+    display: inline-block;
+    vertical-align: top;
+    margin: 5px;
+    border: solid;
+    padding: 14px;
+}
+
+form {
+    width: 19em;
+}
+
+.header {
+    width: 23em;
 }
 
 .users-grid .users-row>div {
-    display: inline-block;
+    display:inline-block;
+    padding : 5px;
 }

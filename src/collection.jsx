@@ -51,18 +51,20 @@ const Input = ({ link, ...props }) => (
 
         return (
             <div>
-                <button onClick={ () => state.editing = new User() }>
-                    Add User
-                </button>
+                <div className="header">
+                    <button onClick={ () => state.editing = new User() }>
+                        Add User
+                    </button>
 
-                <UsersGrid>
-                    { state.users.map( user => (
-                        <UserRow key={ user.cid }
-                                 user={ user }
-                                 editingLink={ editingLink }
-                        />
-                    ) )}
-                </UsersGrid>
+                    <UsersGrid>
+                        { state.users.map( user => (
+                            <UserRow key={ user.cid }
+                                     user={ user }
+                                     editingLink={ editingLink }
+                            />
+                        ) )}
+                    </UsersGrid>
+                </div>
 
                 { state.editing &&
                     <EditUser userLink={ editingLink }
@@ -74,28 +76,29 @@ const Input = ({ link, ...props }) => (
 }
 
 const UsersGrid = ({ children, ...props }) =>(
-    <div className="users-grid">
-        <div className="users-row">
-            <div>Name</div>
-            <div>Email</div>
-            <div>Is Active</div>
-            <div/>
-        </div>
+    <table className="users-grid">
+        <tr className="users-row">
+            <th>Name</th>
+            <th>Email</th>
+            <th>Is Active</th>
+            <th/>
+        </tr>
         { children }
-    </div>
+    </table>
 );
 
 const UserRow = ( { user, editingLink } ) =>(
-    <div className="users-row">
-        <div>{ user.name }</div>
-        <div>{ user.email }</div>
-        <div onClick={ () => user.isActive = !user.isActive }>
-            { user.isActive ? 'Yes' : 'No' }</div>
-        <div>
+    <tr className="users-row">
+        <td>{ user.name }</td>
+        <td>{ user.email }</td>
+        <td onClick={ () => user.isActive = !user.isActive }>
+            { user.isActive ? 'Yes' : 'No' }
+        </td>
+        <td>
             <button onClick={ () => editingLink.set( user ) }>Edit</button>
             <button onClick={ () => user.collection.remove( user ) }>X</button>
-        </div>
-    </div>
+        </td>
+    </tr>
 );
 
 @define class EditUser extends React.Component {

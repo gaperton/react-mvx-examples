@@ -34,21 +34,28 @@ const Input = ({ link, ...props }) => (
 /**
  * Here we go. Boom!
  */
-@define class Application extends React.Component {
-    static state = {
-        name : String.isRequired,
-        email : Email.isRequired,
+@define class AppState extends Record {
+    // Persist this class to the local storage.
+    static endpoint = localStorageIO( '/react-r/example/validation' );
+
+    // Define state structure
+    static attributes = {
+        name : '',
+        email : '',
         isActive : true
-    };
+    }
+}
+
+@define class Application extends React.Component {
+    static State = AppState;
 
     componentWillMount(){
         // Load from the local storage.
-        const json = JSON.parse( localStorage.getItem( 'users-form' ) || '{}' );
-        this.state.set( json, { parse : true } );
+        this.state.fetch();
     }
 
     // Save to the local storage
-    onSubmit =  e => localStorage.setItem( 'users-form', JSON.stringify( this.state ) );
+    onSubmit =  e => this.state.save();
 
     onCancel = () => this.state.set( this.state.defaults() );
 

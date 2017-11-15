@@ -32,8 +32,10 @@ const Input = ({ link, ...props }) => (
     }
 }
 
-@define class UsersList extends React.Component {
-    static state = {
+@define class AppState extends Record {
+    static endpoint = localStorageIO( '/react-r/example/collection' );
+    
+    static attributes = {
         users   : User.Collection
                     .has.events({
                         remove( user ){
@@ -44,6 +46,10 @@ const Input = ({ link, ...props }) => (
                     }),
         editing : User.shared, // User which is being edited.
     }
+}
+
+@define class UsersList extends React.Component {
+    static State = AppState;
 
     render(){
         const { state } = this,

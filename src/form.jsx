@@ -1,15 +1,16 @@
 import './styles.css'
-import React, { define } from 'react-type-r'
+import React, { define } from 'react-mvx'
 import ReactDOM from 'react-dom'
 import { Record } from 'type-r'
-import { localStorageIO } from '/endpoint/localStorage'
+import { localStorageIO } from 'type-r/endpoints/localStorage'
 
 @define class AppState extends Record {
     // Persist this class to the local storage.
-    static endpoint = localStorageIO( '/react-r/example/form' );
+    static endpoint = localStorageIO( '/react-mvx/example' );
 
     // Define state structure
     static attributes = {
+        id : 'form',
         name : '',
         email : '',
         isActive : true
@@ -25,7 +26,10 @@ import { localStorageIO } from '/endpoint/localStorage'
     }
 
     // Save to the local storage
-    onSubmit =  e => this.state.save();
+    onSubmit =  e => {
+        e.preventDefault();
+        this.state.save();
+    }
 
     onCancel = () => this.state.set( this.state.defaults() );
 

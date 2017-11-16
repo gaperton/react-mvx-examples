@@ -1,4 +1,4 @@
-import React, { define } from 'react-type-r'
+import React, { define } from 'react-mvx'
 import ReactDOM from 'react-dom'
 
 @define class Application extends React.Component {

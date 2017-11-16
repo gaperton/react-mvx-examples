@@ -1,6 +1,8 @@
 import React, { define } from 'react-mvx'
 import ReactDOM from 'react-dom'
+import { Record } from 'type-r'
 import './styles.css'
+import { localStorageIO } from 'type-r/endpoints/localStorage'
 
 /**
  * React-MVx itself is rather thin layer on top of the Type-R,
@@ -36,12 +38,13 @@ const Input = ({ link, ...props }) => (
  */
 @define class AppState extends Record {
     // Persist this class to the local storage.
-    static endpoint = localStorageIO( '/react-r/example/validation' );
+    static endpoint = localStorageIO( '/react-mvx/example' );
 
     // Define state structure
     static attributes = {
-        name : '',
-        email : '',
+        id : 'validation',
+        name : String.isRequired,
+        email : Email.isRequired,
         isActive : true
     }
 }
@@ -55,7 +58,10 @@ const Input = ({ link, ...props }) => (
     }
 
     // Save to the local storage
-    onSubmit =  e => this.state.save();
+    onSubmit =  e => {
+        e.preventDefault();
+        this.state.save();
+    }
 
     onCancel = () => this.state.set( this.state.defaults() );
 

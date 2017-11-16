@@ -2,6 +2,7 @@ import './styles.css'
 import ReactDOM from 'react-dom'
 import React, { Link } from 'react-mvx'
 import { Record, define } from 'type-r'
+import { localStorageIO } from 'type-r/endpoints/localStorage'
 
 function isValidEmail( x ){
     return !x || x.indexOf('@') >= 0;
@@ -25,6 +26,8 @@ const Input = ({ link, ...props }) => (
 );
 
 @define class User extends Record {
+    static endpoint = localStorageIO( '/react-mvx/collection/users' );
+    
     static attributes = {
         name : String.isRequired,
         email : Email.isRequired,
@@ -33,9 +36,8 @@ const Input = ({ link, ...props }) => (
 }
 
 @define class AppState extends Record {
-    static endpoint = localStorageIO( '/react-r/example/collection' );
-    
     static attributes = {
+        id : "collection",
         users   : User.Collection
                     .has.events({
                         remove( user ){
@@ -50,6 +52,10 @@ const Input = ({ link, ...props }) => (
 
 @define class UsersList extends React.Component {
     static State = AppState;
+
+    componentWillMount(){
+        this.state.users.fetch();
+    }
 
     render(){
         const { state } = this,
@@ -74,10 +80,15 @@ const Input = ({ link, ...props }) => (
 
                 { state.editing &&
                     <EditUser userLink={ editingLink }
-                              onSave={ user => state.users.add( user ) }/>
+                              onSave={ this.saveUser }/>
                 }
             </div>
         );
+    }
+
+    saveUser = user => {
+        user.save()
+            .then( () => this.state.users.add( user ) );
     }
 }
 

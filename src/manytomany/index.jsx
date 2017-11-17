@@ -5,7 +5,8 @@ import { Store } from 'type-r'
 import { attributesIO } from 'type-r/endpoints/attributes'
 
 import { User, UserRole } from './data-layer'
-import { UsersList, RolesList } from './view-layer.jsx'
+import { UsersList } from './users.jsx'
+import { RolesList } from './roles.jsx'
 
 /**
  * Let's define an application page.

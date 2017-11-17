@@ -1,3 +1,7 @@
+/**
+ * Users list, implemented as stateful component.
+ */
+
 import React, { define } from 'react-mvx'
 import { User } from './data-layer'
 
@@ -10,7 +14,10 @@ export class UsersList extends React.Component {
     static pureRender = true;
 
     static state = {
-        selected : User.from( '~users' )
+        // Any of these options will work:
+        selected : User.from( '~users' ) // user model from store.users collection
+        // selected : User.from( '^props.users' ), // user model from this.props.users collection
+        // selected : User.shared, // user model from some collection, non-serializable
     }
 
     render(){
@@ -33,7 +40,7 @@ export class UsersList extends React.Component {
     }
 }
 
- export const UserView = ({ user, selectedLink }) => (
+export const UserView = ({ user, selectedLink }) => (
     <tr className={ selectedLink.value === user ? 'selected' : '' }
         onClick={ () => selectedLink.set( user ) }
     >
@@ -48,35 +55,6 @@ export class UsersList extends React.Component {
         </td>
         <td className='field'>
             { user.roles.pluck( 'name' ).join( ', ' ) }
-        </td>
-    </tr>
- );
-
-export const RolesList = ({ roles, selectedLink }) => (
-    <table>
-        <tbody>
-            { roles.map( role => (
-                <RoleView key={ role.cid }
-                        role={ role }
-                        selectedLink={ selectedLink }
-                />
-            )) }
-        </tbody>
-    </table>
-);
-
-export const RoleView = ({ role, selectedLink }) => (
-    <tr className={ selectedLink.value === role ? 'selected' : '' }
-        onClick={ () => selectedLink.set( role ) }
-    >
-        <td className='field'>
-            { role.id }
-        </td>
-        <td className='field'>
-            { role.name }
-        </td>
-        <td className='field'>
-            { role.users.pluck( 'name' ).join( ', ' ) }
         </td>
     </tr>
 );

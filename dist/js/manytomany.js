@@ -24927,7 +24927,9 @@ var _attributes = __webpack_require__(85);
 
 var _dataLayer = __webpack_require__(79);
 
-var _viewLayer = __webpack_require__(88);
+var _users = __webpack_require__(88);
+
+var _roles = __webpack_require__(89);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -25002,13 +25004,13 @@ var UsersDirectoryPage = (0, _reactMvx.define)(_class3 = (_temp2 = _class4 = fun
                 null,
                 'Users'
             ),
-            _reactMvx2.default.createElement(_viewLayer.UsersList, { users: store.users }),
+            _reactMvx2.default.createElement(_users.UsersList, { users: store.users }),
             _reactMvx2.default.createElement(
                 'h1',
                 null,
                 'Roles'
             ),
-            _reactMvx2.default.createElement(_viewLayer.RolesList, { roles: store.roles,
+            _reactMvx2.default.createElement(_roles.RolesList, { roles: store.roles,
                 selectedLink: state.linkAt('selectedRole') })
         );
     };
@@ -25179,9 +25181,11 @@ rolesJson.forEach(function (role) {
 
 
 exports.__esModule = true;
-exports.RoleView = exports.RolesList = exports.UserView = exports.UsersList = undefined;
+exports.UserView = exports.UsersList = undefined;
 
-var _class, _class2, _temp;
+var _class, _class2, _temp; /**
+                             * Users list, implemented as stateful component.
+                             */
 
 var _reactMvx = __webpack_require__(36);
 
@@ -25234,7 +25238,10 @@ var UsersList = exports.UsersList = (0, _reactMvx.define)(_class = (_temp = _cla
 }(_reactMvx2.default.Component), _class2.props = {
     users: _dataLayer.User.Collection
 }, _class2.pureRender = true, _class2.state = {
-    selected: _dataLayer.User.from('~users')
+    // Any of these options will work:
+    selected: _dataLayer.User.from('~users') // user model from store.users collection
+    // selected : User.from( '^props.users' ), // user model from this.props.users collection
+    // selected : User.shared, // user model from some collection, non-serializable
 }, _temp)) || _class;
 
 var UserView = exports.UserView = function UserView(_ref) {
@@ -25270,9 +25277,25 @@ var UserView = exports.UserView = function UserView(_ref) {
     );
 };
 
-var RolesList = exports.RolesList = function RolesList(_ref2) {
-    var roles = _ref2.roles,
-        selectedLink = _ref2.selectedLink;
+/***/ }),
+/* 89 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+exports.RoleView = exports.RolesList = undefined;
+
+var _reactMvx = __webpack_require__(36);
+
+var _reactMvx2 = _interopRequireDefault(_reactMvx);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var RolesList = exports.RolesList = function RolesList(_ref) {
+    var roles = _ref.roles,
+        selectedLink = _ref.selectedLink;
     return _reactMvx2.default.createElement(
         'table',
         null,
@@ -25287,11 +25310,13 @@ var RolesList = exports.RolesList = function RolesList(_ref2) {
             })
         )
     );
-};
+}; /**
+    * RolesList, implemented as pure component
+    */
 
-var RoleView = exports.RoleView = function RoleView(_ref3) {
-    var role = _ref3.role,
-        selectedLink = _ref3.selectedLink;
+var RoleView = exports.RoleView = function RoleView(_ref2) {
+    var role = _ref2.role,
+        selectedLink = _ref2.selectedLink;
     return _reactMvx2.default.createElement(
         'tr',
         { className: selectedLink.value === role ? 'selected' : '',

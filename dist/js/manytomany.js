@@ -25019,8 +25019,15 @@ var UsersDirectoryPage = (0, _reactMvx.define)(_class3 = (_temp2 = _class4 = fun
 }(_reactMvx2.default.Component), _class4.Store = PageStore, _class4.state = {
     loading: true,
 
-    // Record from this.store.roles. Serializable as record.id.
+    // Record from the roles collection taken from closest store (`this.store.roles`). Serializable as record.id.
     selectedRole: _dataLayer.UserRole.from('~roles')
+
+    // Record taken explicitly from `this.store.roles`
+    // (^ means "resolve the rest of the path relative to my parent")
+    // selectedRole : UserRole.from( '^store.roles' )
+
+    // UserRole taken from any collection, non-serializable.
+    // selectedRole : UserRole.shared
 }, _temp2)) || _class3;
 
 _reactDom2.default.render(_reactMvx2.default.createElement(UsersDirectoryPage, null), document.getElementById('react-application'));

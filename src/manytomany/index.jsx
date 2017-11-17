@@ -33,8 +33,15 @@ import { RolesList } from './roles.jsx'
     static state = {
         loading : true,
 
-        // Record from this.store.roles. Serializable as record.id.
+        // Record from the roles collection taken from closest store (`this.store.roles`). Serializable as record.id.
         selectedRole : UserRole.from( '~roles' )
+        
+        // Record taken explicitly from `this.store.roles`
+        // (^ means "resolve the rest of the path relative to my parent")
+        // selectedRole : UserRole.from( '^store.roles' )
+
+        // UserRole taken from any collection, non-serializable.
+        // selectedRole : UserRole.shared
     }
 
     componentWillMount(){

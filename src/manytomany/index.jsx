@@ -32,8 +32,11 @@ import { UsersList, RolesList } from './view-layer.jsx'
     static state = {
         loading : true,
 
+        // Record from this.store.users. Serializable as record.id.
         selectedUser : User.from( '~users' ),
-        selectedRole : UserRole.from( '~roles' ),
+
+        // Record from this.store.roles. Serializable as record.id.
+        selectedRole : UserRole.from( '~roles' )
     }
 
     componentWillMount(){
@@ -48,7 +51,7 @@ import { UsersList, RolesList } from './view-layer.jsx'
     render(){
         const { store, state } = this;
 
-        console.log( 'State = ', JSON.stringify( state ) );
+        console.log( 'Page render! state.toJSON() == ', JSON.stringify( state, void 0, 4 ) );
 
         return state.loading ? (
             <div>Loading...</div> 

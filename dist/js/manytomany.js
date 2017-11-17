@@ -24913,7 +24913,7 @@ var UsersDirectoryPage = (0, _reactMvx.define)(_class3 = (_temp2 = _class4 = fun
             state = this.state;
 
 
-        console.log('State = ', JSON.stringify(state));
+        console.log('Page render! state.toJSON() == ', JSON.stringify(state, void 0, 4));
 
         return state.loading ? _reactMvx2.default.createElement(
             'div',
@@ -24943,7 +24943,10 @@ var UsersDirectoryPage = (0, _reactMvx.define)(_class3 = (_temp2 = _class4 = fun
 }(_reactMvx2.default.Component), _class4.Store = PageStore, _class4.state = {
     loading: true,
 
+    // Record from this.store.users. Serializable as record.id.
     selectedUser: _dataLayer.User.from('~users'),
+
+    // Record from this.store.roles. Serializable as record.id.
     selectedRole: _dataLayer.UserRole.from('~roles')
 }, _temp2)) || _class3;
 

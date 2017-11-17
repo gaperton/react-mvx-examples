@@ -25157,7 +25157,16 @@ var MemoryEndpoint = (function () {
 exports.__esModule = true;
 var usersJson = exports.usersJson = [{ id: 1, name: 'John', email: 'john@test.com', roles: [2] }, { id: 2, name: 'Mark', email: 'mark@test.com', roles: [3] }, { id: 3, name: 'Ori', email: 'ori@test.com', roles: [1] }, { id: 4, name: 'Avnil', email: 'avnil@test.com', roles: [1, 3] }, { id: 5, name: 'Vlad', email: 'vlad@test.com', roles: [1, 3] }, { id: 6, name: 'Rob', email: 'rob@test.com', roles: [3] }];
 
-var rolesJson = exports.rolesJson = [{ id: 1, name: 'Administrators', users: [3, 4, 5] }, { id: 2, name: 'Users', users: [1] }, { id: 3, name: 'Developers', users: [2, 4, 5, 6] }];
+var rolesJson = exports.rolesJson = [{ id: 1, name: 'Administrators' }, { id: 2, name: 'Users' }, { id: 3, name: 'Developers' }];
+
+// Generate references to users...
+rolesJson.forEach(function (role) {
+    role.users = usersJson.filter(function (user) {
+        return user.roles.indexOf(role.id) >= 0;
+    }).map(function (user) {
+        return user.id;
+    });
+});
 
 /***/ }),
 /* 88 */

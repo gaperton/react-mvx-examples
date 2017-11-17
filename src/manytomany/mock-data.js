@@ -8,7 +8,14 @@ export const usersJson = [
 ];
 
 export const rolesJson = [
-    { id : 1, name : 'Administrators', users : [ 3, 4, 5 ] },
-    { id : 2, name : 'Users', users : [ 1 ] },
-    { id : 3, name : 'Developers', users : [ 2, 4, 5, 6 ] }
+    { id : 1, name : 'Administrators' },
+    { id : 2, name : 'Users' },
+    { id : 3, name : 'Developers' }
 ];
+
+// Generate references to users...
+rolesJson.forEach( role => {
+    role.users = usersJson
+                    .filter( user => user.roles.indexOf( role.id ) >= 0 )
+                    .map( user => user.id );
+});

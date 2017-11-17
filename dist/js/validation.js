@@ -24268,7 +24268,7 @@ exports = module.exports = __webpack_require__(75)(undefined);
 
 
 // module
-exports.push([module.i, ".validated-control .error {\n    display: inline-block;\n    color: red;\n    padding-left: 6px;\n}\n\n.validated-control {\n    display: inline-block;\n}\n\nlabel {\n    display: block;\n    margin: 10px;\n}\n\n.header,form {\n    display: inline-block;\n    vertical-align: top;\n    margin: 5px;\n    border: solid;\n    padding: 14px;\n}\n\nform {\n    width: 19em;\n}\n\n.header {\n    width: 23em;\n}\n\n.users-grid .users-row>div {\n    display:inline-block;\n    padding : 5px;\n}", ""]);
+exports.push([module.i, ".validated-control .error {\n    display: inline-block;\n    color: red;\n    padding-left: 6px;\n}\n\n.validated-control {\n    display: inline-block;\n}\n\nlabel {\n    display: block;\n    margin: 10px;\n}\n\n.header,form {\n    display: inline-block;\n    vertical-align: top;\n    margin: 5px;\n    border: solid;\n    padding: 14px;\n}\n\nform {\n    width: 19em;\n}\n\n.header {\n    width: 23em;\n}\n\n.users-grid .users-row>div {\n    display:inline-block;\n    padding : 5px;\n}\n\n.selected {\n    background-color: lightblue;\n}", ""]);
 
 // exports
 

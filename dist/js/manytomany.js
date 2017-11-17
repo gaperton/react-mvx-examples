@@ -24268,7 +24268,7 @@ exports = module.exports = __webpack_require__(75)(undefined);
 
 
 // module
-exports.push([module.i, ".validated-control .error {\n    display: inline-block;\n    color: red;\n    padding-left: 6px;\n}\n\n.validated-control {\n    display: inline-block;\n}\n\nlabel {\n    display: block;\n    margin: 10px;\n}\n\n.header,form {\n    display: inline-block;\n    vertical-align: top;\n    margin: 5px;\n    border: solid;\n    padding: 14px;\n}\n\nform {\n    width: 19em;\n}\n\n.header {\n    width: 23em;\n}\n\n.users-grid .users-row>div {\n    display:inline-block;\n    padding : 5px;\n}", ""]);
+exports.push([module.i, ".validated-control .error {\n    display: inline-block;\n    color: red;\n    padding-left: 6px;\n}\n\n.validated-control {\n    display: inline-block;\n}\n\nlabel {\n    display: block;\n    margin: 10px;\n}\n\n.header,form {\n    display: inline-block;\n    vertical-align: top;\n    margin: 5px;\n    border: solid;\n    padding: 14px;\n}\n\nform {\n    width: 19em;\n}\n\n.header {\n    width: 23em;\n}\n\n.users-grid .users-row>div {\n    display:inline-block;\n    padding : 5px;\n}\n\n.selected {\n    background-color: lightblue;\n}", ""]);
 
 // exports
 
@@ -24928,19 +24928,23 @@ var UsersDirectoryPage = (0, _reactMvx.define)(_class3 = (_temp2 = _class4 = fun
                 null,
                 'Users'
             ),
-            _reactMvx2.default.createElement(_viewLayer.UsersList, { users: store.users }),
+            _reactMvx2.default.createElement(_viewLayer.UsersList, { users: store.users,
+                selectedLink: state.linkAt('selectedUser') }),
             _reactMvx2.default.createElement(
                 'h1',
                 null,
                 'Roles'
             ),
-            _reactMvx2.default.createElement(_viewLayer.RolesList, { roles: store.roles })
+            _reactMvx2.default.createElement(_viewLayer.RolesList, { roles: store.roles,
+                selectedLink: state.linkAt('selectedRole') })
         );
     };
 
     return UsersDirectoryPage;
 }(_reactMvx2.default.Component), _class4.Store = UsersDirectory, _class4.state = {
-    loading: true
+    loading: true,
+    selectedUser: _dataLayer.User.shared,
+    selectedRole: _dataLayer.UserRole.shared
 }, _temp2)) || _class3;
 
 _reactDom2.default.render(_reactMvx2.default.createElement(UsersDirectoryPage, null), document.getElementById('react-application'));
@@ -25185,21 +25189,33 @@ var _reactMvx2 = _interopRequireDefault(_reactMvx);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var UsersList = exports.UsersList = function UsersList(_ref) {
-    var users = _ref.users;
+    var users = _ref.users,
+        selectedLink = _ref.selectedLink;
     return _reactMvx2.default.createElement(
         'table',
         null,
-        users.map(function (user) {
-            return _reactMvx2.default.createElement(UserView, { key: user.cid, user: user });
-        })
+        _reactMvx2.default.createElement(
+            'tbody',
+            null,
+            users.map(function (user) {
+                return _reactMvx2.default.createElement(UserView, { key: user.cid,
+                    user: user,
+                    selected: selectedLink.value === user,
+                    onClick: function onClick() {
+                        return selectedLink.set(user);
+                    }
+                });
+            })
+        )
     );
 };
 
 var UserView = exports.UserView = function UserView(_ref2) {
-    var user = _ref2.user;
+    var user = _ref2.user,
+        selected = _ref2.selected;
     return _reactMvx2.default.createElement(
         'tr',
-        { className: 'row' },
+        { className: selected ? 'selected' : '' },
         _reactMvx2.default.createElement(
             'td',
             { className: 'field' },
@@ -25224,21 +25240,33 @@ var UserView = exports.UserView = function UserView(_ref2) {
 };
 
 var RolesList = exports.RolesList = function RolesList(_ref3) {
-    var roles = _ref3.roles;
+    var roles = _ref3.roles,
+        selectedLink = _ref3.selectedLink;
     return _reactMvx2.default.createElement(
         'table',
         null,
-        roles.map(function (role) {
-            return _reactMvx2.default.createElement(RoleView, { key: role.cid, role: role });
-        })
+        _reactMvx2.default.createElement(
+            'tbody',
+            null,
+            roles.map(function (role) {
+                return _reactMvx2.default.createElement(RoleView, { key: role.cid,
+                    role: role,
+                    selected: selectedLink.value === role,
+                    onClick: function onClick() {
+                        return selectedLink.set(role);
+                    }
+                });
+            })
+        )
     );
 };
 
 var RoleView = exports.RoleView = function RoleView(_ref4) {
-    var role = _ref4.role;
+    var role = _ref4.role,
+        selected = _ref4.selected;
     return _reactMvx2.default.createElement(
         'tr',
-        { className: 'row' },
+        { className: selected ? 'selected' : '' },
         _reactMvx2.default.createElement(
             'td',
             { className: 'field' },

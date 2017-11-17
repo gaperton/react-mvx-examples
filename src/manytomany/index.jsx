@@ -31,7 +31,9 @@ export class UsersDirectory extends Store {
 
     // Simple inline UI state...
     static state = {
-        loading : true
+        loading : true,
+        selectedUser : User.shared,
+        selectedRole : UserRole.shared,
     }
 
     componentWillMount(){
@@ -51,10 +53,12 @@ export class UsersDirectory extends Store {
         ) : (
             <div>
                 <h1>Users</h1>
-                <UsersList users={ store.users } />
+                <UsersList users={ store.users }
+                           selectedLink={ state.linkAt( 'selectedUser' )} />
 
                 <h1>Roles</h1>
-                <RolesList roles={ store.roles } />
+                <RolesList roles={ store.roles }
+                           selectedLink={ state.linkAt( 'selectedRole' ) }/>
             </div>
         );
     }

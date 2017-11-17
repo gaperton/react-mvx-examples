@@ -1,15 +1,21 @@
 import React from 'react-mvx'
 
-export const UsersList = ({ users }) => (
+export const UsersList = ({ users, selectedLink }) => (
     <table>
-        { users.map( user => (
-            <UserView key={ user.cid } user={ user } />
-        )) }
+        <tbody>
+            { users.map( user => (
+                <UserView key={ user.cid }
+                            user={ user }
+                            selected={ selectedLink.value === user }
+                            onClick={ () => selectedLink.set( user ) }
+                />
+            )) }
+        </tbody>
     </table>
 );
 
- export const UserView = ({ user }) => (
-    <tr className='row'>
+ export const UserView = ({ user, selected }) => (
+    <tr className={ selected ? 'selected' : '' }>
         <td className='field'>
             { user.id }
         </td>
@@ -25,16 +31,22 @@ export const UsersList = ({ users }) => (
     </tr>
  );
 
-export const RolesList = ({ roles }) => (
+export const RolesList = ({ roles, selectedLink }) => (
     <table>
-        { roles.map( role => (
-            <RoleView key={ role.cid } role={ role } />
-        )) }
+        <tbody>
+            { roles.map( role => (
+                <RoleView key={ role.cid }
+                        role={ role }
+                        selected={ selectedLink.value === role }
+                        onClick={ () => selectedLink.set( role ) }
+                />
+            )) }
+        </tbody>
     </table>
 );
 
-export const RoleView = ({ role }) => (
-    <tr className='row'>
+export const RoleView = ({ role, selected }) => (
+    <tr className={ selected ? 'selected' : '' }>
         <td className='field'>
             { role.id }
         </td>

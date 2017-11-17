@@ -24834,9 +24834,6 @@ module.exports = function (css) {
 "use strict";
 
 
-exports.__esModule = true;
-exports.UsersDirectory = undefined;
-
 var _class, _class2, _temp, _class3, _class4, _temp2;
 
 __webpack_require__(73);
@@ -24871,16 +24868,16 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 // We use stores to combine several collections required by the page which needs to be fetched independently.
 // Store is the Record which used as root to resolve ~references.
-var UsersDirectory = exports.UsersDirectory = (0, _reactMvx.define)(_class = (_temp = _class2 = function (_Store) {
-    _inherits(UsersDirectory, _Store);
+var PageStore = (0, _reactMvx.define)(_class = (_temp = _class2 = function (_Store) {
+    _inherits(PageStore, _Store);
 
-    function UsersDirectory() {
-        _classCallCheck(this, UsersDirectory);
+    function PageStore() {
+        _classCallCheck(this, PageStore);
 
         return _possibleConstructorReturn(this, _Store.apply(this, arguments));
     }
 
-    return UsersDirectory;
+    return PageStore;
 }(_typeR.Store), _class2.endpoint = (0, _attributes.attributesIO)(), _class2.attributes = {
     users: _dataLayer.User.Collection, // master collection for .subsetOf( '~users' )
     roles: _dataLayer.UserRole.Collection // master collection for .subsetOf( '~roles' )
@@ -24916,6 +24913,8 @@ var UsersDirectoryPage = (0, _reactMvx.define)(_class3 = (_temp2 = _class4 = fun
             state = this.state;
 
 
+        console.log('State = ', JSON.stringify(state));
+
         return state.loading ? _reactMvx2.default.createElement(
             'div',
             null,
@@ -24941,10 +24940,11 @@ var UsersDirectoryPage = (0, _reactMvx.define)(_class3 = (_temp2 = _class4 = fun
     };
 
     return UsersDirectoryPage;
-}(_reactMvx2.default.Component), _class4.Store = UsersDirectory, _class4.state = {
+}(_reactMvx2.default.Component), _class4.Store = PageStore, _class4.state = {
     loading: true,
-    selectedUser: _dataLayer.User.shared,
-    selectedRole: _dataLayer.UserRole.shared
+
+    selectedUser: _dataLayer.User.from('~users'),
+    selectedRole: _dataLayer.UserRole.from('~roles')
 }, _temp2)) || _class3;
 
 _reactDom2.default.render(_reactMvx2.default.createElement(UsersDirectoryPage, null), document.getElementById('react-application'));
@@ -25200,10 +25200,7 @@ var UsersList = exports.UsersList = function UsersList(_ref) {
             users.map(function (user) {
                 return _reactMvx2.default.createElement(UserView, { key: user.cid,
                     user: user,
-                    selected: selectedLink.value === user,
-                    onClick: function onClick() {
-                        return selectedLink.set(user);
-                    }
+                    selectedLink: selectedLink
                 });
             })
         )
@@ -25212,10 +25209,14 @@ var UsersList = exports.UsersList = function UsersList(_ref) {
 
 var UserView = exports.UserView = function UserView(_ref2) {
     var user = _ref2.user,
-        selected = _ref2.selected;
+        selectedLink = _ref2.selectedLink;
     return _reactMvx2.default.createElement(
         'tr',
-        { className: selected ? 'selected' : '' },
+        { className: selectedLink.value === user ? 'selected' : '',
+            onClick: function onClick() {
+                return selectedLink.set(user);
+            }
+        },
         _reactMvx2.default.createElement(
             'td',
             { className: 'field' },
@@ -25251,10 +25252,7 @@ var RolesList = exports.RolesList = function RolesList(_ref3) {
             roles.map(function (role) {
                 return _reactMvx2.default.createElement(RoleView, { key: role.cid,
                     role: role,
-                    selected: selectedLink.value === role,
-                    onClick: function onClick() {
-                        return selectedLink.set(role);
-                    }
+                    selectedLink: selectedLink
                 });
             })
         )
@@ -25263,10 +25261,14 @@ var RolesList = exports.RolesList = function RolesList(_ref3) {
 
 var RoleView = exports.RoleView = function RoleView(_ref4) {
     var role = _ref4.role,
-        selected = _ref4.selected;
+        selectedLink = _ref4.selectedLink;
     return _reactMvx2.default.createElement(
         'tr',
-        { className: selected ? 'selected' : '' },
+        { className: selectedLink.value === role ? 'selected' : '',
+            onClick: function onClick() {
+                return selectedLink.set(role);
+            }
+        },
         _reactMvx2.default.createElement(
             'td',
             { className: 'field' },

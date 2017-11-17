@@ -13,8 +13,7 @@ import { UsersList, RolesList } from './view-layer.jsx'
 
 // We use stores to combine several collections required by the page which needs to be fetched independently.
 // Store is the Record which used as root to resolve ~references.
-@define
-export class UsersDirectory extends Store {
+@define class PageStore extends Store {
     // Fetch attributes independently, return the combined promise.
     static endpoint = attributesIO();
 
@@ -27,13 +26,14 @@ export class UsersDirectory extends Store {
  @define class UsersDirectoryPage extends React.Component {
     // This store will be created on component's mount, and disposed when it is unmounted.
     // The store will be used as a root for ~refs in the local state of component's subtree.
-    static Store = UsersDirectory;
+    static Store = PageStore;
 
     // Simple inline UI state...
     static state = {
         loading : true,
-        selectedUser : User.shared,
-        selectedRole : UserRole.shared,
+
+        selectedUser : User.from( '~users' ),
+        selectedRole : UserRole.from( '~roles' ),
     }
 
     componentWillMount(){
@@ -47,6 +47,8 @@ export class UsersDirectory extends Store {
 
     render(){
         const { store, state } = this;
+
+        console.log( 'State = ', JSON.stringify( state ) );
 
         return state.loading ? (
             <div>Loading...</div> 

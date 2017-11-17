@@ -6,16 +6,17 @@ export const UsersList = ({ users, selectedLink }) => (
             { users.map( user => (
                 <UserView key={ user.cid }
                             user={ user }
-                            selected={ selectedLink.value === user }
-                            onClick={ () => selectedLink.set( user ) }
+                            selectedLink={ selectedLink }
                 />
             )) }
         </tbody>
     </table>
 );
 
- export const UserView = ({ user, selected }) => (
-    <tr className={ selected ? 'selected' : '' }>
+ export const UserView = ({ user, selectedLink }) => (
+    <tr className={ selectedLink.value === user ? 'selected' : '' }
+        onClick={ () => selectedLink.set( user ) }
+    >
         <td className='field'>
             { user.id }
         </td>
@@ -37,16 +38,17 @@ export const RolesList = ({ roles, selectedLink }) => (
             { roles.map( role => (
                 <RoleView key={ role.cid }
                         role={ role }
-                        selected={ selectedLink.value === role }
-                        onClick={ () => selectedLink.set( role ) }
+                        selectedLink={ selectedLink }
                 />
             )) }
         </tbody>
     </table>
 );
 
-export const RoleView = ({ role, selected }) => (
-    <tr className={ selected ? 'selected' : '' }>
+export const RoleView = ({ role, selectedLink }) => (
+    <tr className={ selectedLink.value === role ? 'selected' : '' }
+        onClick={ () => selectedLink.set( role ) }
+    >
         <td className='field'>
             { role.id }
         </td>

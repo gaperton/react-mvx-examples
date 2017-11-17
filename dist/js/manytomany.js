@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/dist/js";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 83);
+/******/ 	return __webpack_require__(__webpack_require__.s = 84);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -24824,178 +24824,7 @@ module.exports = function (css) {
 
 /***/ }),
 /* 78 */,
-/* 79 */,
-/* 80 */,
-/* 81 */,
-/* 82 */,
-/* 83 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _class, _class2, _temp, _class3, _class4, _temp2;
-
-__webpack_require__(73);
-
-var _reactDom = __webpack_require__(64);
-
-var _reactDom2 = _interopRequireDefault(_reactDom);
-
-var _reactMvx = __webpack_require__(36);
-
-var _reactMvx2 = _interopRequireDefault(_reactMvx);
-
-var _typeR = __webpack_require__(4);
-
-var _attributes = __webpack_require__(84);
-
-var _dataLayer = __webpack_require__(85);
-
-var _viewLayer = __webpack_require__(88);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-/**
- * Let's define an application page.
- */
-
-// We use stores to combine several collections required by the page which needs to be fetched independently.
-// Store is the Record which used as root to resolve ~references.
-var PageStore = (0, _reactMvx.define)(_class = (_temp = _class2 = function (_Store) {
-    _inherits(PageStore, _Store);
-
-    function PageStore() {
-        _classCallCheck(this, PageStore);
-
-        return _possibleConstructorReturn(this, _Store.apply(this, arguments));
-    }
-
-    return PageStore;
-}(_typeR.Store), _class2.endpoint = (0, _attributes.attributesIO)(), _class2.attributes = {
-    users: _dataLayer.User.Collection, // master collection for .subsetOf( '~users' )
-    roles: _dataLayer.UserRole.Collection // master collection for .subsetOf( '~roles' )
-}, _temp)) || _class;
-
-var UsersDirectoryPage = (0, _reactMvx.define)(_class3 = (_temp2 = _class4 = function (_React$Component) {
-    _inherits(UsersDirectoryPage, _React$Component);
-
-    function UsersDirectoryPage() {
-        _classCallCheck(this, UsersDirectoryPage);
-
-        return _possibleConstructorReturn(this, _React$Component.apply(this, arguments));
-    }
-
-    // This store will be created on component's mount, and disposed when it is unmounted.
-    // The store will be used as a root for ~refs in the local state of component's subtree.
-    UsersDirectoryPage.prototype.componentWillMount = function componentWillMount() {
-        var _this3 = this;
-
-        var finished = function finished() {
-            return _this3.state.loading = false;
-        };
-
-        // Read the data...
-        this.store.fetch().then(finished).catch(finished);
-    };
-
-    // Simple inline UI state...
-
-
-    UsersDirectoryPage.prototype.render = function render() {
-        var store = this.store,
-            state = this.state;
-
-
-        console.log('Page render! state.toJSON() == ', JSON.stringify(state, void 0, 4));
-
-        return state.loading ? _reactMvx2.default.createElement(
-            'div',
-            null,
-            'Loading...'
-        ) : _reactMvx2.default.createElement(
-            'div',
-            null,
-            _reactMvx2.default.createElement(
-                'h1',
-                null,
-                'Users'
-            ),
-            _reactMvx2.default.createElement(_viewLayer.UsersList, { users: store.users,
-                selectedLink: state.linkAt('selectedUser') }),
-            _reactMvx2.default.createElement(
-                'h1',
-                null,
-                'Roles'
-            ),
-            _reactMvx2.default.createElement(_viewLayer.RolesList, { roles: store.roles,
-                selectedLink: state.linkAt('selectedRole') })
-        );
-    };
-
-    return UsersDirectoryPage;
-}(_reactMvx2.default.Component), _class4.Store = PageStore, _class4.state = {
-    loading: true,
-
-    // Record from this.store.users. Serializable as record.id.
-    selectedUser: _dataLayer.User.from('~users'),
-
-    // Record from this.store.roles. Serializable as record.id.
-    selectedRole: _dataLayer.UserRole.from('~roles')
-}, _temp2)) || _class3;
-
-_reactDom2.default.render(_reactMvx2.default.createElement(UsersDirectoryPage, null), document.getElementById('react-application'));
-
-/***/ }),
-/* 84 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (immutable) */ __webpack_exports__["create"] = create;
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "attributesIO", function() { return create; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AttributesEndpoint", function() { return AttributesEndpoint; });
-function create() {
-    return new AttributesEndpoint();
-}
-
-var AttributesEndpoint = (function () {
-    function AttributesEndpoint() {
-    }
-    AttributesEndpoint.prototype.create = function (json, options) {
-        throw new Error('Method is not supported.');
-    };
-    AttributesEndpoint.prototype.update = function (id, json, options) {
-        throw new Error('Method is not supported.');
-    };
-    AttributesEndpoint.prototype.read = function (id, options, record) {
-        var names = record.keys().filter(function (name) { return record[name] && record[name].fetch; }), promises = names.map(function (name) { return record[name].fetch(options); }), promise = Promise.all(promises).then(function () { });
-        promise.abort = function () {
-            promises.forEach(function (x) { return x.abort && x.abort(); });
-        };
-        return promise;
-    };
-    AttributesEndpoint.prototype.destroy = function (id, options) {
-        throw new Error('Method is not supported.');
-    };
-    AttributesEndpoint.prototype.list = function (options) {
-        throw new Error('Method is not supported.');
-    };
-    AttributesEndpoint.prototype.subscribe = function (events) { };
-    AttributesEndpoint.prototype.unsubscribe = function (events) { };
-    return AttributesEndpoint;
-}());
-
-//# sourceMappingURL=attributes.js.map
-
-/***/ }),
-/* 85 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25068,6 +24897,173 @@ UserRole.define({
         users: User.Collection.subsetOf('~users')
     }
 });
+
+/***/ }),
+/* 80 */,
+/* 81 */,
+/* 82 */,
+/* 83 */,
+/* 84 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _class, _class2, _temp, _class3, _class4, _temp2;
+
+__webpack_require__(73);
+
+var _reactDom = __webpack_require__(64);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _reactMvx = __webpack_require__(36);
+
+var _reactMvx2 = _interopRequireDefault(_reactMvx);
+
+var _typeR = __webpack_require__(4);
+
+var _attributes = __webpack_require__(85);
+
+var _dataLayer = __webpack_require__(79);
+
+var _viewLayer = __webpack_require__(88);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+/**
+ * Let's define an application page.
+ */
+
+// We use stores to combine several collections required by the page which needs to be fetched independently.
+// Store is the Record which used as root to resolve ~references.
+var PageStore = (0, _reactMvx.define)(_class = (_temp = _class2 = function (_Store) {
+    _inherits(PageStore, _Store);
+
+    function PageStore() {
+        _classCallCheck(this, PageStore);
+
+        return _possibleConstructorReturn(this, _Store.apply(this, arguments));
+    }
+
+    return PageStore;
+}(_typeR.Store), _class2.endpoint = (0, _attributes.attributesIO)(), _class2.attributes = {
+    users: _dataLayer.User.Collection, // master collection for .subsetOf( '~users' )
+    roles: _dataLayer.UserRole.Collection // master collection for .subsetOf( '~roles' )
+}, _temp)) || _class;
+
+var UsersDirectoryPage = (0, _reactMvx.define)(_class3 = (_temp2 = _class4 = function (_React$Component) {
+    _inherits(UsersDirectoryPage, _React$Component);
+
+    function UsersDirectoryPage() {
+        _classCallCheck(this, UsersDirectoryPage);
+
+        return _possibleConstructorReturn(this, _React$Component.apply(this, arguments));
+    }
+
+    // This store will be created on component's mount, and disposed when it is unmounted.
+    // The store will be used as a root for ~refs in the local state of component's subtree.
+    UsersDirectoryPage.prototype.componentWillMount = function componentWillMount() {
+        var _this3 = this;
+
+        var finished = function finished() {
+            return _this3.state.loading = false;
+        };
+
+        // Read the data...
+        this.store.fetch().then(finished).catch(finished);
+    };
+
+    // Simple inline UI state...
+
+
+    UsersDirectoryPage.prototype.render = function render() {
+        var store = this.store,
+            state = this.state;
+
+
+        console.log('UsersDirectoryPage.render(): state.toJSON() ==', JSON.stringify(state, void 0, 4));
+
+        return state.loading ? _reactMvx2.default.createElement(
+            'div',
+            null,
+            'Loading...'
+        ) : _reactMvx2.default.createElement(
+            'div',
+            null,
+            _reactMvx2.default.createElement(
+                'h1',
+                null,
+                'Users'
+            ),
+            _reactMvx2.default.createElement(_viewLayer.UsersList, { users: store.users }),
+            _reactMvx2.default.createElement(
+                'h1',
+                null,
+                'Roles'
+            ),
+            _reactMvx2.default.createElement(_viewLayer.RolesList, { roles: store.roles,
+                selectedLink: state.linkAt('selectedRole') })
+        );
+    };
+
+    return UsersDirectoryPage;
+}(_reactMvx2.default.Component), _class4.Store = PageStore, _class4.state = {
+    loading: true,
+
+    // Record from this.store.roles. Serializable as record.id.
+    selectedRole: _dataLayer.UserRole.from('~roles')
+}, _temp2)) || _class3;
+
+_reactDom2.default.render(_reactMvx2.default.createElement(UsersDirectoryPage, null), document.getElementById('react-application'));
+
+/***/ }),
+/* 85 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (immutable) */ __webpack_exports__["create"] = create;
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "attributesIO", function() { return create; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AttributesEndpoint", function() { return AttributesEndpoint; });
+function create() {
+    return new AttributesEndpoint();
+}
+
+var AttributesEndpoint = (function () {
+    function AttributesEndpoint() {
+    }
+    AttributesEndpoint.prototype.create = function (json, options) {
+        throw new Error('Method is not supported.');
+    };
+    AttributesEndpoint.prototype.update = function (id, json, options) {
+        throw new Error('Method is not supported.');
+    };
+    AttributesEndpoint.prototype.read = function (id, options, record) {
+        var names = record.keys().filter(function (name) { return record[name] && record[name].fetch; }), promises = names.map(function (name) { return record[name].fetch(options); }), promise = Promise.all(promises).then(function () { });
+        promise.abort = function () {
+            promises.forEach(function (x) { return x.abort && x.abort(); });
+        };
+        return promise;
+    };
+    AttributesEndpoint.prototype.destroy = function (id, options) {
+        throw new Error('Method is not supported.');
+    };
+    AttributesEndpoint.prototype.list = function (options) {
+        throw new Error('Method is not supported.');
+    };
+    AttributesEndpoint.prototype.subscribe = function (events) { };
+    AttributesEndpoint.prototype.unsubscribe = function (events) { };
+    return AttributesEndpoint;
+}());
+
+//# sourceMappingURL=attributes.js.map
 
 /***/ }),
 /* 86 */
@@ -25185,34 +25181,65 @@ rolesJson.forEach(function (role) {
 exports.__esModule = true;
 exports.RoleView = exports.RolesList = exports.UserView = exports.UsersList = undefined;
 
+var _class, _class2, _temp;
+
 var _reactMvx = __webpack_require__(36);
 
 var _reactMvx2 = _interopRequireDefault(_reactMvx);
 
+var _dataLayer = __webpack_require__(79);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var UsersList = exports.UsersList = function UsersList(_ref) {
-    var users = _ref.users,
-        selectedLink = _ref.selectedLink;
-    return _reactMvx2.default.createElement(
-        'table',
-        null,
-        _reactMvx2.default.createElement(
-            'tbody',
-            null,
-            users.map(function (user) {
-                return _reactMvx2.default.createElement(UserView, { key: user.cid,
-                    user: user,
-                    selectedLink: selectedLink
-                });
-            })
-        )
-    );
-};
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var UserView = exports.UserView = function UserView(_ref2) {
-    var user = _ref2.user,
-        selectedLink = _ref2.selectedLink;
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var UsersList = exports.UsersList = (0, _reactMvx.define)(_class = (_temp = _class2 = function (_React$Component) {
+    _inherits(UsersList, _React$Component);
+
+    function UsersList() {
+        _classCallCheck(this, UsersList);
+
+        return _possibleConstructorReturn(this, _React$Component.apply(this, arguments));
+    }
+
+    UsersList.prototype.render = function render() {
+        var _this2 = this;
+
+        var users = this.props.users;
+
+
+        console.log('UsersList.render(): state.toJSON() ==', JSON.stringify(this.state, void 0, 4));
+
+        return _reactMvx2.default.createElement(
+            'table',
+            null,
+            _reactMvx2.default.createElement(
+                'tbody',
+                null,
+                users.map(function (user) {
+                    return _reactMvx2.default.createElement(UserView, { key: user.cid,
+                        user: user,
+                        selectedLink: _this2.linkAt('selected')
+                    });
+                })
+            )
+        );
+    };
+
+    return UsersList;
+}(_reactMvx2.default.Component), _class2.props = {
+    users: _dataLayer.User.Collection
+}, _class2.pureRender = true, _class2.state = {
+    selected: _dataLayer.User.from('~users')
+}, _temp)) || _class;
+
+var UserView = exports.UserView = function UserView(_ref) {
+    var user = _ref.user,
+        selectedLink = _ref.selectedLink;
     return _reactMvx2.default.createElement(
         'tr',
         { className: selectedLink.value === user ? 'selected' : '',
@@ -25243,9 +25270,9 @@ var UserView = exports.UserView = function UserView(_ref2) {
     );
 };
 
-var RolesList = exports.RolesList = function RolesList(_ref3) {
-    var roles = _ref3.roles,
-        selectedLink = _ref3.selectedLink;
+var RolesList = exports.RolesList = function RolesList(_ref2) {
+    var roles = _ref2.roles,
+        selectedLink = _ref2.selectedLink;
     return _reactMvx2.default.createElement(
         'table',
         null,
@@ -25262,9 +25289,9 @@ var RolesList = exports.RolesList = function RolesList(_ref3) {
     );
 };
 
-var RoleView = exports.RoleView = function RoleView(_ref4) {
-    var role = _ref4.role,
-        selectedLink = _ref4.selectedLink;
+var RoleView = exports.RoleView = function RoleView(_ref3) {
+    var role = _ref3.role,
+        selectedLink = _ref3.selectedLink;
     return _reactMvx2.default.createElement(
         'tr',
         { className: selectedLink.value === role ? 'selected' : '',

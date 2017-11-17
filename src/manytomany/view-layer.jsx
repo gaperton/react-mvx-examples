@@ -1,17 +1,37 @@
-import React from 'react-mvx'
+import React, { define } from 'react-mvx'
+import { User } from './data-layer'
 
-export const UsersList = ({ users, selectedLink }) => (
-    <table>
-        <tbody>
-            { users.map( user => (
-                <UserView key={ user.cid }
-                            user={ user }
-                            selectedLink={ selectedLink }
-                />
-            )) }
-        </tbody>
-    </table>
-);
+@define
+export class UsersList extends React.Component {
+    static props = {
+        users : User.Collection
+    }
+
+    static pureRender = true;
+
+    static state = {
+        selected : User.from( '~users' )
+    }
+
+    render(){
+        const { users } = this.props;
+
+        console.log( 'UsersList.render(): state.toJSON() ==', JSON.stringify( this.state, void 0, 4 ) );
+
+        return (
+            <table>
+                <tbody>
+                    { users.map( user => (
+                        <UserView key={ user.cid }
+                                    user={ user }
+                                    selectedLink={ this.linkAt( 'selected' ) }
+                        />
+                    )) }
+                </tbody>
+            </table>
+        );
+    }
+}
 
  export const UserView = ({ user, selectedLink }) => (
     <tr className={ selectedLink.value === user ? 'selected' : '' }

@@ -32,9 +32,6 @@ import { UsersList, RolesList } from './view-layer.jsx'
     static state = {
         loading : true,
 
-        // Record from this.store.users. Serializable as record.id.
-        selectedUser : User.from( '~users' ),
-
         // Record from this.store.roles. Serializable as record.id.
         selectedRole : UserRole.from( '~roles' )
     }
@@ -51,15 +48,14 @@ import { UsersList, RolesList } from './view-layer.jsx'
     render(){
         const { store, state } = this;
 
-        console.log( 'Page render! state.toJSON() == ', JSON.stringify( state, void 0, 4 ) );
+        console.log( 'UsersDirectoryPage.render(): state.toJSON() ==', JSON.stringify( state, void 0, 4 ) );
 
         return state.loading ? (
             <div>Loading...</div> 
         ) : (
             <div>
                 <h1>Users</h1>
-                <UsersList users={ store.users }
-                           selectedLink={ state.linkAt( 'selectedUser' )} />
+                <UsersList users={ store.users } />
 
                 <h1>Roles</h1>
                 <RolesList roles={ store.roles }

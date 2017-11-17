@@ -25,8 +25,8 @@ import { RolesList } from './roles.jsx'
 }
 
  @define class UsersDirectoryPage extends React.Component {
-    // This store will be created on component's mount, and disposed when it is unmounted.
     // The store will be used as a root for ~refs in the local state of component's subtree.
+    // This store will be created on component's mount, and disposed when it is unmounted.
     static Store = PageStore;
 
     // Simple inline UI state...

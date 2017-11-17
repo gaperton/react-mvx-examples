@@ -24969,8 +24969,8 @@ var UsersDirectoryPage = (0, _reactMvx.define)(_class3 = (_temp2 = _class4 = fun
         return _possibleConstructorReturn(this, _React$Component.apply(this, arguments));
     }
 
-    // This store will be created on component's mount, and disposed when it is unmounted.
     // The store will be used as a root for ~refs in the local state of component's subtree.
+    // This store will be created on component's mount, and disposed when it is unmounted.
     UsersDirectoryPage.prototype.componentWillMount = function componentWillMount() {
         var _this3 = this;
 

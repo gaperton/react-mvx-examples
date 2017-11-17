@@ -6,7 +6,7 @@ var config = {
         form : './src/form.jsx',
         validation : './src/validation.jsx',
         collection : './src/collection.jsx',
-        manytomany : './src/manytomany.jsx',
+        manytomany : './src/manytomany/index.jsx',
         paging : './src/paging.jsx',
         recursive : './src/recursive.jsx',
         multipage : './src/multipage/index.jsx'

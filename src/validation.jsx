@@ -27,10 +27,10 @@ const Email = String.has.check( isValidEmail );
  * Lets define an input control which displays the validation error.
  */
 const Input = ({ link, ...props }) => (
-    <div className="validated-control">
+    <tr className="validated-control">
         <input { ...link.props} />
-        { link.error && <div className="error">{ link.error }</div> }
-    </div>
+        { link.error && <tr className="error">{ link.error }</tr> }
+    </tr>
 );
 
 /**

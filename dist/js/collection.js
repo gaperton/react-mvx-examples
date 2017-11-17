@@ -24967,11 +24967,11 @@ var Input = function Input(_ref) {
         props = _objectWithoutProperties(_ref, ['link']);
 
     return _reactMvx2.default.createElement(
-        'div',
+        'tr',
         { className: 'validated-control' },
         _reactMvx2.default.createElement('input', _extends({}, props, link.props)),
         link.error && _reactMvx2.default.createElement(
-            'div',
+            'tr',
             { className: 'error' },
             link.error
         )
@@ -25045,10 +25045,10 @@ var UsersList = (0, _typeR.define)(_class5 = (_temp4 = _class6 = function (_Reac
 
 
         return _reactMvx2.default.createElement(
-            'div',
+            'tr',
             null,
             _reactMvx2.default.createElement(
-                'div',
+                'tr',
                 { className: 'header' },
                 _reactMvx2.default.createElement(
                     'button',

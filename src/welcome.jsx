@@ -9,12 +9,12 @@ import ReactDOM from 'react-dom'
     render(){
         const { state } = this;
         return (
-            <div>
+            <tr>
                 { state.count }
                 <button onClick={ () => state.count++ }>
                     Increment
                 </button>                
-            </div>
+            </tr>
         );
     }
 }

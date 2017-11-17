@@ -24272,7 +24272,7 @@ var Application = (0, _reactMvx.define)(_class = (_temp = _class2 = function (_R
         var state = this.state;
 
         return _reactMvx2.default.createElement(
-            'div',
+            'tr',
             null,
             state.count,
             _reactMvx2.default.createElement(

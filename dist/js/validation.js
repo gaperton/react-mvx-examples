@@ -24974,11 +24974,11 @@ var Input = function Input(_ref) {
         props = _objectWithoutProperties(_ref, ['link']);
 
     return _reactMvx2.default.createElement(
-        'div',
+        'tr',
         { className: 'validated-control' },
         _reactMvx2.default.createElement('input', link.props),
         link.error && _reactMvx2.default.createElement(
-            'div',
+            'tr',
             { className: 'error' },
             link.error
         )

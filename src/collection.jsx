@@ -19,10 +19,10 @@ const Email = String.has.check( isValidEmail );
  * Lets define an input control which displays the validation error.
  */
 const Input = ({ link, ...props }) => (
-    <div className="validated-control">
+    <tr className="validated-control">
         <input {...props} { ...link.props} />
-        { link.error && <div className="error">{ link.error }</div> }
-    </div>
+        { link.error && <tr className="error">{ link.error }</tr> }
+    </tr>
 );
 
 @define class User extends Record {
@@ -62,8 +62,8 @@ const Input = ({ link, ...props }) => (
                 editingLink = state.linkAt( 'editing' );
 
         return (
-            <div>
-                <div className="header">
+            <tr>
+                <tr className="header">
                     <button onClick={ () => state.editing = new User() }>
                         Add User
                     </button>
@@ -76,13 +76,13 @@ const Input = ({ link, ...props }) => (
                             />
                         ) )}
                     </UsersGrid>
-                </div>
+                </tr>
 
                 { state.editing &&
                     <EditUser userLink={ editingLink }
                               onSave={ this.saveUser }/>
                 }
-            </div>
+            </tr>
         );
     }
 

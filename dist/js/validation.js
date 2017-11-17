@@ -3580,7 +3580,7 @@ function createChangeTokensConstructor(props) {
 var EmptyPropsChangeTokensCtor = createChangeTokensConstructor({});
 var PureRenderMixin = {
     shouldComponentUpdate: function (nextProps) {
-        return this._propsChangeTokens._hasChanges(nextProps);
+        return this._propsChangeTokens._hasChanges(nextProps, this.state);
     },
     componentDidMount: updateChangeTokens,
     componentDidUpdate: updateChangeTokens
